@@ -75,7 +75,7 @@ def sequence_alignment(protein1, protein2, delta=-4, BLOSUM_matrix=None):
 protein2 = "GCATGCV"
 protein1 = "GATTACA"
 
-matrix = pd.read_csv("/Users/hlibisev/Documents/GitHub/bioinformatics-algorithms/BLOSUM")
+matrix = pd.read_csv("/Needleman Wunsch Alrogithm/BLOSUM")
 print(sequence_alignment(protein1, protein2, -4, matrix))
 # Вывод: ('__GATTACA', 'GC_ATG_CV')
 
