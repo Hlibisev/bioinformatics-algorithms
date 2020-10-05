@@ -1,17 +1,14 @@
 import numpy as np
 
 
-def get_wunsch_matrix(protein1, protein2, delta=-4, BLOSUM_matrix=None, local=False):
+def get_wunsch_matrix(protein1: list, protein2: list, delta: float = -4, BLOSUM_matrix = None, local: bool = False):
     """
-    ____________________________________
-    :type protein1: list
-    :type protein2: list
-    :type delta: int
-    :type BLOSUM_matrix: pandas.DataFrame
-    :type local: boolean
-    :return pandas.DataFrame
-    _____________________________________
-    Create matrix used for algorithms of alignment
+    :param protein1: first list of strings which we will alignment
+    :param protein2: second list of strings which we will alignment
+    :param delta: penalty for mismatch
+    :param BLOSUM_matrix:
+    :param local: if local alignment then True else False
+    :return: matrix used for algorithms of alignment
     """
 
     if local is False:
@@ -34,7 +31,21 @@ def get_wunsch_matrix(protein1, protein2, delta=-4, BLOSUM_matrix=None, local=Fa
 
 
 def value_from_matrix(protein1, protein2, matrix):
+    """
+    :param protein1: first letter
+    :param protein2: second letter
+    :param matrix: matrix of weights or list of weight_match and weight_mismatch
+    :return: penalty value
+    """
 
+    # If we have weight_match and weight_mismatch
+    if matrix is list:
+        if protein1 == protein2:
+            return matrix[0]
+        else:
+            return matrix[1]
+
+    # If we have marix, BLOSUM, for example
     ind1 = list(matrix.columns).index(protein1)
     ind2 = list(matrix.columns).index(protein2)
 
