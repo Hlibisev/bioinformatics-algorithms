@@ -10,15 +10,14 @@ def get_wunsch_matrix(protein1: list, protein2: list, delta: float = -4, BLOSUM_
     :param local: if local alignment then True else False
     :return: matrix used for algorithms of alignment
     """
+    matrix = np.zeros((len(protein1) + 1, len(protein2) + 1))
 
     if local is False:
         local = float("-inf")
+        matrix[:, 0] = np.array([delta * i for i in range(len(protein1) + 1)])
+        matrix[0, :] = np.array([delta * i for i in range(len(protein2) + 1)])
     else:
         local = 0
-
-    matrix = np.zeros((len(protein1) + 1, len(protein2) + 1))
-    matrix[:, 0] = np.array([delta * i for i in range(len(protein1) + 1)])
-    matrix[0, :] = np.array([delta * i for i in range(len(protein2) + 1)])
 
     for i in range(matrix.shape[0] - 1):
         for j in range(matrix.shape[1] - 1):

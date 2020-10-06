@@ -51,7 +51,7 @@ def local_alignment(protein1, protein2, delta=-4, BLOSUM_matrix=None):
         i -= 1
         j -= 1
 
-    while end1 <= len(protein1) or end2 <= len(protein2):
+    while end1 < len(protein1) or end2 < len(protein2):
         letter1 = "_" if end1 >= len(protein1) else protein1[end1]
         letter2 = "_" if end2 >= len(protein2) else protein2[end2]
 
