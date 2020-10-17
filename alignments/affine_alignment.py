@@ -21,8 +21,8 @@ def affine_alignment(protein1, protein2, open_gap_penalty, continue_gap_penalty,
     way = np.zeros((len(protein1) + 1, len(protein2) + 1))
 
     for matrix in [s_down, s_right, s_diag]:
-        matrix[:, 0] = np.array([continue_gap_penalty * i for i in range(len(protein1) + 1)]) + open_gap_penalty
-        matrix[0, :] = np.array([continue_gap_penalty * i for i in range(len(protein2) + 1)]) + open_gap_penalty
+        matrix[1:, 0] = np.array([continue_gap_penalty * i for i in range(1, len(protein1) + 1)]) + open_gap_penalty
+        matrix[0, 1:] = np.array([continue_gap_penalty * i for i in range(1, len(protein2) + 1)]) + open_gap_penalty
 
     # Filling in three matrix's
     for i in range(s_diag.shape[0] - 1):
@@ -77,13 +77,13 @@ def affine_alignment(protein1, protein2, open_gap_penalty, continue_gap_penalty,
 
 if __name__ == "__main__":
 
-    protein1 = "GGGACTGAG"
-    protein2 = "GACTA"
+    protein1 = "TCCCAGTTATGTCAGGGGACACGAGCATGCAGAGAC"
+    protein2 = "AATTGCCGCCGTCGTTTTCAGCAGTTATGTCAGATC"
 
     matrix = pd.read_csv("/Users/hlibisev/Documents/GitHub/bioinformatics-algorithms/alignments/BLOSUM")
-    print(affine_alignment(protein1, protein2, -4, -1, matrix))
+    print(affine_alignment(protein1, protein2, -100, -0.01, [1, -1]))
     # Вывод: ('GGGACTGAG', '__GACT__A') - что интересно, потому что алгоритм не хочет открывать 2 раза _
 
-    print(affine_alignment(protein1, protein2, -1, -4, matrix))
+    # print(affine_alignment(protein1, protein2, -1, -4, matrix))
     # Вывод: ('GGGACTGAG', '__GACT_A_')
 

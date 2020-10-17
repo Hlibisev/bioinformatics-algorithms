@@ -38,7 +38,7 @@ def value_from_matrix(protein1, protein2, matrix):
     """
 
     # If we have weight_match and weight_mismatch
-    if matrix is list:
+    if isinstance(matrix, list):
         if protein1 == protein2:
             return matrix[0]
         else:
