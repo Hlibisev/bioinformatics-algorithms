@@ -1,4 +1,3 @@
-import numpy as np
 import pandas as pd
 from tools import get_wunsch_matrix, value_from_matrix
 
@@ -16,7 +15,7 @@ def global_alignment(protein1, protein2, delta=-4, BLOSUM_matrix=None):
     alignment1, alignment2 = [], []
     protein1, protein2 = list(protein1), list(protein2)
     matrix = get_wunsch_matrix(protein1, protein2, delta, BLOSUM_matrix, False)
-
+    print(matrix)
     i, j = len(protein1) - 1, len(protein2) - 1
     while i > -1 and j > -1:
         comp = value_from_matrix(protein1[i], protein2[j], BLOSUM_matrix)
@@ -53,8 +52,8 @@ def global_alignment(protein1, protein2, delta=-4, BLOSUM_matrix=None):
 
 if __name__ == "__main__":
 
-    protein1 = "GGGACTGAG"
-    protein2 = "GACT"
+    protein1 = "SENR"
+    protein2 = "ANR"
 
     matrix = pd.read_csv("/Users/hlibisev/Documents/GitHub/bioinformatics-algorithms/alignments/BLOSUM")
-    print(global_alignment(protein1, protein2, -4, matrix))
+    print(global_alignment(protein1, protein2, -10, matrix))
