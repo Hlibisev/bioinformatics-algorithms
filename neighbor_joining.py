@@ -23,7 +23,6 @@ def get_nj_string(leaves):
 
 
 def nj_step(matrix, leaves):
-
     if len(matrix) == 2:
         return None, [Cluster(leaves[0], leaves[1], (matrix[0, 1] / 2, matrix[0, 1] / 2))]
 
@@ -53,8 +52,7 @@ def nj_step(matrix, leaves):
         for j in range(i, len(leaves)):
             dists_matrix[i, j] = nj_dist(i, j)
 
-
-    i, j = argmin(matrix)
+    i, j = argmin(dists_matrix)
     distance = matrix[i, j]
     dist_U_A = mean_dist(i, j)
     dist_U_B = mean_dist(j, i)
