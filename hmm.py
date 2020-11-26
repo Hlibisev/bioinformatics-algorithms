@@ -15,7 +15,7 @@ def viterbi(a, pi, b, seq):
     for i in range(len(seq) - 2, -1, -1):
         hidden[i] = trace[hidden[i + 1], i]
 
-    return hidden[::-1]
+    return hidden
 
 
 def forward_backward(a, pi, b, seq):
